@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { FiDownload, FiExternalLink } from 'react-icons/fi';
 import { personalInfo } from '../data/portfolioData';
 
+
 const Hero = () => {
   return (
     <section id="home" className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-primary-50 via-white to-secondary-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
@@ -40,8 +41,8 @@ const Hero = () => {
             transition={{ delay: 0.6, duration: 0.8 }}
           >
             <motion.a
-              href={personalInfo.cv}
-              download
+              href='/MitenShah.pdf'
+              download="MitenShah.pdf"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="inline-flex items-center px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-colors shadow-lg hover:shadow-xl"
