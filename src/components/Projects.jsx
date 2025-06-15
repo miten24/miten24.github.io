@@ -50,6 +50,7 @@ const Projects = () => {
 
                 <motion.a
                   href={project.link}
+                  target='_blank'
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="inline-flex items-center px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-colors"

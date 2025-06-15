@@ -15,14 +15,14 @@ const Footer = () => {
           className="text-center"
         >
           <p className="text-gray-600 dark:text-gray-400 flex items-center justify-center">
-            Made with{' '}
-            <motion.span
+            Made {' '}
+            {/* <motion.span
               animate={{ scale: [1, 1.2, 1] }}
               transition={{ duration: 1.5, repeat: Infinity }}
               className="mx-1"
             >
               <FiHeart className="text-red-500" size={16} />
-            </motion.span>
+            </motion.span> */}
             by {personalInfo.name}
           </p>
           <p className="text-sm text-gray-500 dark:text-gray-500 mt-2">

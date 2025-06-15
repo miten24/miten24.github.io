@@ -181,7 +181,7 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FiMail, FiLinkedin, FiSend } from 'react-icons/fi';
+import { FiMail, FiLinkedin, FiSend, FiGithub } from 'react-icons/fi';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { personalInfo } from '../data/portfolioData';
@@ -246,7 +246,7 @@ const Contact = () => {
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-primary-600 to-secondary-600 mx-auto mb-6"></div>
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            I'm always open to discussing new opportunities, innovative projects, or just having a great conversation about product management.
+            I'm always open to discussing new opportunities, innovative projects, or just having a great conversation.
           </p>
         </motion.div>
 
@@ -362,6 +362,22 @@ const Contact = () => {
                 <div>
                   <h4 className="font-semibold text-gray-900 dark:text-white">LinkedIn</h4>
                   <p className="text-gray-600 dark:text-gray-400">Connect with me</p>
+                </div>
+              </motion.a>
+
+              <motion.a
+                href={personalInfo.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.05 }}
+                className="flex items-center p-4 bg-white dark:bg-gray-900 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors"
+              >
+                <div className="flex items-center justify-center w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-full mr-4">
+                  <FiGithub className="text-primary-600 dark:text-primary-400" size={20} />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900 dark:text-white">Github</h4>
+                  <p className="text-gray-600 dark:text-gray-400">Check out my work</p>
                 </div>
               </motion.a>
             </div>

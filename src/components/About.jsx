@@ -46,10 +46,10 @@ const About = () => {
               <span className="text-2xl">🎯</span>
             </motion.div>
             <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-              Product Focus
+              Product Leadership
             </h3>
             <p className="text-gray-600 dark:text-gray-400">
-              User-centric approach to building meaningful digital products
+              Driving user-focused outcomes through strategy, teamwork, and execution
             </p>
           </div>
 
@@ -64,7 +64,7 @@ const About = () => {
               Agile Mindset
             </h3>
             <p className="text-gray-600 dark:text-gray-400">
-              Iterative execution and continuous improvement
+              Leading iterative sprints with speed, flexibility, and clarity
             </p>
           </div>
 
@@ -76,10 +76,10 @@ const About = () => {
               <span className="text-2xl">📊</span>
             </motion.div>
             <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-              Data-Driven
+              Global & Data-Driven
             </h3>
             <p className="text-gray-600 dark:text-gray-400">
-              Analytics-based decisions and measurable outcomes
+              Blending insights from India, the UK, and Norway to build inclusive, impactful products
             </p>
           </div>
         </motion.div>
