@@ -31,13 +31,27 @@ const Navigation = () => {
   }, []);
 
   const handleNavClick = (href) => {
-    const element = document.querySelector(href);
+    const targetId = href.substring(1); // Remove the # from href
+    const element = document.getElementById(targetId);
+    
     if (element) {
-      const yOffset = -80; 
-      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      window.scrollTo({ top: y, behavior: 'smooth' });
+   
+      setIsOpen(false);
+      
+     
+      setTimeout(() => {
+        const elementPosition = element.offsetTop;
+        const offsetPosition = elementPosition - 80;
+        
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }, 100);
+    } else {
+      
+      setIsOpen(false);
     }
-    setIsOpen(false);
   };
 
   return (
@@ -51,7 +65,8 @@ const Navigation = () => {
           {/* Logo */}
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="font-bold text-xl text-primary-600 dark:text-primary-400"
+            className="font-bold text-xl text-primary-600 dark:text-primary-400 cursor-pointer"
+            onClick={() => handleNavClick('#home')}
           >
             Miten Shah
           </motion.div>
@@ -118,10 +133,10 @@ const Navigation = () => {
                 key={item.name}
                 onClick={() => handleNavClick(item.href)}
                 whileTap={{ scale: 0.95 }}
-                className={`block w-full text-left px-3 py-2 text-base font-medium transition-colors ${
+                className={`block w-full text-left px-3 py-2 text-base font-medium transition-colors rounded-lg ${
                   activeSection === item.href.substring(1)
                     ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20'
-                    : 'text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400'
+                    : 'text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-800'
                 }`}
               >
                 {item.name}
