@@ -8,7 +8,7 @@ const Experience = () => {
   const displayedExperiences = showAll ? experiences : experiences.filter(exp => exp.featured);
 
   return (
-    <section id="experience" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800">
+    <section id="experience" className="scroll-mt-24 py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800">
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -45,7 +45,7 @@ const Experience = () => {
               <div className={`ml-12 md:ml-0 md:w-1/2 ${index % 2 === 0 ? 'md:pr-8' : 'md:pl-8'}`}>
                 <motion.div
                   whileHover={{ scale: 1.02 }}
-                  className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700"
+                  className="bg-white dark:bg-gray-900 p-4 sm:p-6 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700"
                 >
                   <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-2">
                     <FiCalendar className="mr-1" />

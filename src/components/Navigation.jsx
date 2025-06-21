@@ -31,27 +31,11 @@ const Navigation = () => {
   }, []);
 
   const handleNavClick = (href) => {
-    const targetId = href.substring(1); // Remove the # from href
-    const element = document.getElementById(targetId);
-    
+    const element = document.querySelector(href);
     if (element) {
-   
-      setIsOpen(false);
-      
-     
-      setTimeout(() => {
-        const elementPosition = element.offsetTop;
-        const offsetPosition = elementPosition - 80;
-        
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-      }, 100);
-    } else {
-      
-      setIsOpen(false);
+      element.scrollIntoView({ behavior: 'smooth' });
     }
+    setIsOpen(false);
   };
 
   return (
@@ -125,7 +109,8 @@ const Navigation = () => {
         <motion.div
           initial={false}
           animate={{ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0 }}
-          className="md:hidden overflow-hidden"
+          transition={{ duration: 0.3, ease: 'easeInOut' }}
+          className="md:hidden overflow-hidden min-h-[0]"
         >
           <div className="py-4 space-y-2">
             {navigationItems.map((item) => (

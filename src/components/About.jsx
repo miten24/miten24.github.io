@@ -4,7 +4,7 @@ import { personalInfo } from '../data/portfolioData';
 
 const About = () => {
   return (
-    <section id="about" className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
+    <section id="about" className="scroll-mt-24 py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -24,7 +24,7 @@ const About = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8 shadow-lg"
+          className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-6 sm:p-8 shadow-lg"
         >
           <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed text-center">
             {personalInfo.about}
@@ -36,7 +36,7 @@ const About = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8"
+          className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8"
         >
           <div className="text-center">
             <motion.div

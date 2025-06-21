@@ -14,7 +14,16 @@ export const ThemeProvider = ({ children }) => {
   const [isDark, setIsDark] = useState(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('theme');
-      return saved ? JSON.parse(saved) : false;
+      if (saved) {
+        try {
+          // Try to parse as JSON first (for boolean values)
+          return JSON.parse(saved);
+        } catch {
+          // If parsing fails, check if it's the string "dark"
+          return saved === 'dark';
+        }
+      }
+      return false;
     }
     return false;
   });

@@ -8,7 +8,7 @@ const Projects = () => {
   const displayedProjects = showAll ? projects : projects.filter(project => project.featured);
 
   return (
-    <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
+    <section id="projects" className="scroll-mt-24 py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -23,7 +23,7 @@ const Projects = () => {
           <div className="w-24 h-1 bg-gradient-to-r from-primary-600 to-secondary-600 mx-auto"></div>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-12">
           {displayedProjects.map((project, index) => (
             <motion.div
               key={project.id}
@@ -34,7 +34,7 @@ const Projects = () => {
               whileHover={{ y: -5 }}
               className="bg-gray-50 dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden"
             >
-              <div className="p-6">
+              <div className="p-4 sm:p-6">
                 <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-3">
                   <FiCalendar className="mr-1" />
                   {project.duration}
