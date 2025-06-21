@@ -33,9 +33,33 @@ const Navigation = () => {
   const handleNavClick = (href) => {
     const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      // Close mobile menu first
+      setIsOpen(false);
+      
+      // Small delay to ensure menu closes before scrolling
+      setTimeout(() => {
+        element.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }, 100);
     }
-    setIsOpen(false);
+  };
+
+  const handleMobileNavClick = (href) => {
+    const element = document.querySelector(href);
+    if (element) {
+      // Close mobile menu immediately
+      setIsOpen(false);
+      
+      // Scroll to element with a bit more delay for mobile
+      setTimeout(() => {
+        element.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }, 150);
+    }
   };
 
   return (
@@ -116,7 +140,7 @@ const Navigation = () => {
             {navigationItems.map((item) => (
               <motion.button
                 key={item.name}
-                onClick={() => handleNavClick(item.href)}
+                onClick={() => handleMobileNavClick(item.href)}
                 whileTap={{ scale: 0.95 }}
                 className={`block w-full text-left px-3 py-2 text-base font-medium transition-colors rounded-lg ${
                   activeSection === item.href.substring(1)
