@@ -41,7 +41,7 @@ app.post("/contact", async (req, res) => {
       from: process.env.EMAIL_USER,
       to: email,  
       subject: "Thank You for Contacting Us!",
-      text: `Hi ${name},\n\nWe've received your message and will respond shortly.\n\nBest Regards,\nMiten Shah`,
+      text: `Hi ${name},\n\nThank you for getting in touch!\n\nI’ve received your message and will get back to you as soon as possible. I really appreciate your interest.\n\nFeel free to reach out again if you have any urgent queries.\n\nBest regards,\nMiten Shah\n+91-7874393172\nmitenshah24@gmail.com`,
     });
 
     res.status(200).json({ message: "Form submitted successfully" });
