@@ -13,13 +13,13 @@ export const experiences = [
     id: 1,
     company: "InteligenAI",
     role: "Product Manager",
-    duration: "Jan 2025 – Present",
+    duration: "Jan 2025 – Sep 2025",
     location: "Gurugram, India",
     achievements: [
       "Led end-to-end development of Intellivisa, a digital visa platform, enhancing user experience and reducing processing time by 30% via OCR + RPA.",
-      "Achieved 100% scope completion and increased system performance score from 55 to 81 by delivering GHMIS 2.0 with continuous user feedback integration.",
-      "Improved stakeholder visibility by 85% through automated Jira reporting using Google Apps Script, enhancing project transparency.",
-      "Led a cross-functional team of 10, applying agile methodologies to ship features efficiently and drive user-centric innovation."
+      "Achieved 100% scope completion and increased system performance score from 55 to 81 by delivering GHMIS 2.0 with continuous user feedback integration and leveraging insights from Microsoft Clarity and Google Analytics.",
+      "Improved stakeholder visibility by 85% through automated Jira reporting using Google Apps Script and creating Power BI dashboards for key presentations, enhancing project transparency.",
+      "Led a cross-functional team of 10, applying agile methodologies to plan Jira sprints, design Draw.io workflows, and ship features efficiently to drive user-centric innovation."
     ],
     featured: true
   },
@@ -95,6 +95,24 @@ export const certifications = [
 export const projects = [
   {
     id: 1,
+    title: "My PSJ Foundation",
+    duration: "Dec 2024 – Present",
+    description:
+      "As a Founder, I led the development of a social platform connecting NGOs with donors. I designed a matchmaking logic and till date successfully connected with 9+ NGOs for onboarding.",
+    link: "https://www.mypsjfoundation.com/",
+    featured: true
+  },
+  {
+    id: 2,
+    title: "Wedding Planner Kit",
+    duration: "July 2025 – Aug 2025",
+    description:
+      "Built a data-driven Wedding Planner Kit with a Power BI dashboard featuring 18+ metrics for tracking budget vs. expense, vendor comparisons, guest management, and more.",
+    link: "https://drive.google.com/drive/folders/1azD_iTyufDamAqrhW64EtCV89q0fyb_M?usp=sharing",
+    featured: true
+  },
+  {
+    id: 3,
     title: "Technology Transfer of AI between Markets",
     duration: "Apr 2023 – Sep 2023",
     description:
@@ -103,7 +121,7 @@ export const projects = [
     featured: true
   },
   {
-    id: 2,
+    id: 4,
     title: "Forever Bikes Business Proposal",
     duration: "Dec 2022 – Apr 2023",
     description:
@@ -112,7 +130,7 @@ export const projects = [
     featured: true
   },
   {
-    id: 3,
+    id: 5,
     title: "Hi-Mate Helmet Business Strategy",
     duration: "Sep 2022 – Apr 2023",
     description:
@@ -121,7 +139,7 @@ export const projects = [
     featured: true
   },
   {
-    id: 4,
+    id: 6,
     title: "Amazon Industry 4.0 Consultancy",
     duration: "Sep 2022 – Dec 2022",
     description:
@@ -130,7 +148,7 @@ export const projects = [
     featured: true
   },
   {
-    id: 5,
+    id: 7,
     title: "Plan My Trip",
     duration: "Jan 2022 – Apr 2022",
     description:
@@ -139,7 +157,7 @@ export const projects = [
     featured: false
   },
   {
-    id: 6,
+    id: 8,
     title: "ERP System for Society Management",
     duration: "Jul 2021 – Nov 2021",
     description:
@@ -151,7 +169,7 @@ export const projects = [
 
 export const skills = {
   product: ["Product Lifecycle Management", "Agile", "Scrum", "PRD", "UAT", "Product Strategy", "Roadmapping"],
-  tools: ["Jira", "Figma", "Notion", "Draw.io", "Microsoft Office Suite", "Google Analytics", "MS Clarity"],
+  tools: ["Jira", "Figma", "Notion", "Draw.io", "Microsoft Office Suite", "Google Analytics", "MS Clarity", "Power BI"],
   soft: ["Stakeholder Management", "Leadership", "Analytical Thinking", "Cross-Functional Collaboration", "Communication", "User Centric Thinking"]
 };
 
@@ -161,7 +179,7 @@ export const community = [
     organization: "Microsoft Student Ambassador",
     role: "Student Ambassador",
     duration: "Sep 2019 – Sep 2023",
-    description: "Mentored over 100 students globally, promoted Microsoft technologies, and built vibrant campus tech communities."
+    description: "Mentored over 100 students globally, promoted Microsoft technologies, built vibrant campus tech communities and achieved the Beta milestone."
   },
   {
     id: 2,
@@ -175,7 +193,7 @@ export const community = [
     organization: "Rotaract Club of Surat",
     role: "Board of Directors",
     duration: "Feb 2021 – Jul 2022",
-    description: "Led a hair donation drive for cancer patients and organized multiple community events, youth programs, and NGO partnerships."
+    description: "Led a hair donation drive for cancer patients and organized 10+ community events, youth programs, and NGO partnerships."
   }
 ];
 
