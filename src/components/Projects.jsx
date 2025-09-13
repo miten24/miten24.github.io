@@ -44,7 +44,7 @@ const Projects = () => {
                   {project.title}
                 </h3>
                 
-                <p className="text-gray-700 dark:text-gray-300 mb-6 line-clamp-3">
+                <p className="text-gray-700 dark:text-gray-300 mb-6">
                   {project.description}
                 </p>
 
