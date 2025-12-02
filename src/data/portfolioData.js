@@ -27,8 +27,8 @@ export const experiences = [
     id: 2,
     company: "Comono AS",
     role: "Product Manager",
-    duration: "Apr 2024 – Nov 2024",
-    location: "Remote",
+    duration: "Sep 2023 – Nov 2024",
+    location: "Remote, UK",
     achievements: [
       "Launched Prevale, an end-to-end accounting and compliance SaaS platform, reducing go-to-market time by 2 weeks.",
       "Owned the full product cycle, including roadmap planning, PRD creation, sprint execution, UI refinements, and UAT sessions.",
@@ -40,7 +40,7 @@ export const experiences = [
   {
     id: 3,
     company: "H. Samuel",
-    role: "Sales & Product Coordinator",
+    role: "P/T Sales & Strategy Associate",
     duration: "Feb 2023 – Sep 2024",
     location: "Leeds, UK",
     achievements: [
@@ -49,14 +49,14 @@ export const experiences = [
       "Achieved 5/5 KPI ratings consistently across 3 consecutive review cycles, the only team member to do so.",
       "Onboarded 14 new customers in a single month, setting a company record and boosting customer engagement."
     ],
-    featured: true
+    featured: false
   },
   {
     id: 4,
     company: "Ajatus Software",
     role: "Project Manager Intern",
     duration: "Mar 2022 – Aug 2022",
-    location: "Remote",
+    location: "Remote, India",
     achievements: [
       "Managed 8+ B2B client projects, handling end-to-end requirement gathering, planning, and documentation.",
       "Conducted market research and provided strategic insights to support client-specific IT service proposals.",
@@ -98,7 +98,7 @@ export const projects = [
     title: "My PSJ Foundation",
     duration: "Dec 2024 – Present",
     description:
-      "As a Founder, I led the development of a social platform connecting NGOs with donors. I designed a matchmaking logic and till date successfully connected with 9+ NGOs for onboarding.",
+      "Founded and led development of a social platform connecting NGOs with donors, designing the matchmaking logic and successfully connected with 9+ NGOs for onboarding.",
     link: "https://www.mypsjfoundation.com/",
     featured: true
   },
@@ -116,7 +116,7 @@ export const projects = [
     title: "Technology Transfer of AI between Markets",
     duration: "Apr 2023 – Sep 2023",
     description:
-      "Explored AI recommendation systems and proposed three scalable strategies to transfer them from developed to emerging markets with a focus on sustainable consumption.",
+      "Explored AI recommendation systems and proposed 3 scalable strategies to transfer them from developed to emerging markets with a focus on sustainable consumption.",
     link: "https://drive.google.com/file/d/1h6dYkkqJLQlx4Mja9RpjURGpFS_P_4TC/view?usp=sharing",
     featured: true
   },
