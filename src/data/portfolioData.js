@@ -116,7 +116,7 @@ export const projects = [
     title: "Technology Transfer of AI between Markets",
     duration: "Apr 2023 – Sep 2023",
     description:
-      "Explored AI recommendation systems and proposed 3 scalable strategies to transfer them from developed to emerging markets with a focus on sustainable consumption.",
+      "Explored AI recommendation systems and proposed 3 scalable strategies to transfer them from developed to emerging markets with a focus on sustainable consumption (MSc Thesis).",
     link: "https://drive.google.com/file/d/1h6dYkkqJLQlx4Mja9RpjURGpFS_P_4TC/view?usp=sharing",
     featured: true
   },
