@@ -99,7 +99,7 @@ export const projects = [
     duration: "Dec 2024 – Present",
     description:
       "Founded and led development of a social platform connecting NGOs with donors, designing the matchmaking logic and successfully connected with 9+ NGOs for onboarding.",
-    link: "https://www.mypsjfoundation.com/",
+    link: "https://mypsjfoundation.vercel.app/",
     featured: true
   },
   {
