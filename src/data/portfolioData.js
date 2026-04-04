@@ -10,6 +10,20 @@ export const personalInfo = {
 
 export const experiences = [
   {
+    id: 0,
+    company: "BigStep Technologies",
+    role: "Project/Product Manager",
+    duration: "Jan 2026 – Present",
+    location: "Remote, India",
+    achievements: [
+      "Leading the product development of the HomeBuild Assist AI agent for JSW Group to analyze architectural drawings and provide automated material and cost insights that are projected to reduce project wastage by up to 20%.",
+      "Achieved a 30% pre sales conversion rate by building functional prototypes using Claude Code and Figma Make while designing comprehensive technical roadmaps for high impact enterprise leads including JSW Group in India, Possibl AI in NZ, SmartWorks in Singapore, and more.",
+      "Optimized the user experience for 3+ IHCL projects including the Taj InnerCircle App by leading UAT and overseeing UI/UX refinements for high priority feature sets to ensure they serve global hotel guests and align with premium hospitality standards.",
+      "𝐑𝐞𝐜𝐨𝐠𝐧𝐢𝐭𝐢𝐨𝐧: Awarded a Certificate of Appreciation in Q1 2026 for exceptional learning agility and impact across project and product management within the first 90 days of joining BigStep."
+    ],
+    featured: true
+  },
+  {
     id: 1,
     company: "InteligenAI",
     role: "Product Manager",
@@ -94,6 +108,15 @@ export const certifications = [
 
 export const projects = [
   {
+    id: 0,
+    title: "The Miten Narrative",
+    duration: "Jan 2026 – Present",
+    description:
+      "Founded and launched a digital storytelling brand across three categories, achieving a 31% reader return rate and a 168-second average engagement time per visit.",
+    link: "https://the-miten-narrative.vercel.app/",
+    featured: true
+  },
+  {
     id: 1,
     title: "My PSJ Foundation",
     duration: "Dec 2024 – Present",
@@ -169,7 +192,7 @@ export const projects = [
 
 export const skills = {
   product: ["Product Lifecycle Management", "Agile", "Scrum", "PRD", "UAT", "Product Strategy", "Roadmapping"],
-  tools: ["Jira", "Figma", "Notion", "Draw.io", "Microsoft Office Suite", "Google Analytics", "MS Clarity", "Power BI"],
+  tools: ["Jira", "Claude Code", "Figma (Make)", "Notion", "Draw.io", "Microsoft Office Suite", "Google Analytics", "MS Clarity", "Power BI"],
   soft: ["Stakeholder Management", "Leadership", "Analytical Thinking", "Cross-Functional Collaboration", "Communication", "User Centric Thinking"]
 };
 
