@@ -168,7 +168,7 @@ export const projects = [
     description:
       "Presented 5 strategic recommendations to Amazon for growth from 2022 to 2027 in the context of Industry 4.0 opportunities and challenges.",
     link: "https://drive.google.com/file/d/1DaYJQPIyxkK1OQuxMm4sgQth2HKFl_x7/view?usp=sharing",
-    featured: true
+    featured: false
   },
   {
     id: 7,
