@@ -6,17 +6,18 @@ const FloatingTags = () => {
     {
       label: 'Product\nManager',
       delay: 0,
-      style: { left: '6%', top: '20%' },
+      style: { left: '4%', top: '12%' },
     },
     {
       label: 'Agile\nStrategist',
       delay: 1.5,
-      style: { right: '8%', top: '30%' },
+      style: { right: '5%', top: '8%' },
     },
     {
       label: 'Global\nMindset',
       delay: 3,
-      style: { left: '50%', bottom: '18%', transform: 'translateX(-50%)' },
+      // moved from bottom-centre to top-centre so it stays visible above the card grid
+      style: { left: '50%', top: '22%', transform: 'translateX(-50%)' },
     },
   ];
 
@@ -27,7 +28,7 @@ const FloatingTags = () => {
         inset: 0,
         pointerEvents: 'none',
         zIndex: 5,
-        overflow: 'hidden',
+        overflow: 'visible',
       }}
     >
       {tags.map((tag) => (

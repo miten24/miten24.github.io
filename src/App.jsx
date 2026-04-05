@@ -47,7 +47,7 @@ function App() {
       {loaded && (
         <LayoutGroup>
           {/* Persistent top navigation (home & sections share it) */}
-          {activeSection === null && <Navigation />}
+          {activeSection === null && <Navigation onNavigate={setActiveSection} />}
 
           <AnimatePresence mode="wait">
             {activeSection === null ? (

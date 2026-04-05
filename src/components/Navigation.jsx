@@ -1,9 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Download, ExternalLink } from 'lucide-react';
-import { personalInfo } from '../data/portfolioData';
 
-const Navigation = () => {
+const Navigation = ({ onNavigate }) => {
   return (
     <motion.nav
       initial={{ opacity: 0, y: -20 }}
@@ -25,8 +23,11 @@ const Navigation = () => {
         borderBottom: '1px solid rgba(255,255,255,0.04)',
       }}
     >
-      {/* Logo / Name */}
-      <div
+      {/* Logo / Name — click to go home */}
+      <motion.button
+        data-hover
+        onClick={() => onNavigate && onNavigate(null)}
+        whileHover={{ opacity: 0.75 }}
         style={{
           fontFamily: '"Playfair Display", Georgia, serif',
           fontSize: 'clamp(1rem, 2vw, 1.2rem)',
@@ -34,63 +35,14 @@ const Navigation = () => {
           color: '#FFFFFF',
           letterSpacing: '0.02em',
           fontStyle: 'italic',
+          background: 'transparent',
+          border: 'none',
+          padding: 0,
+          transition: 'opacity 0.2s',
         }}
       >
         Miten Shah
-      </div>
-
-      {/* Right CTAs */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-        <motion.a
-          data-hover
-          href={personalInfo.linkedin}
-          target="_blank"
-          rel="noopener noreferrer"
-          whileHover={{ color: '#93C5FD' }}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.4rem',
-            fontFamily: 'Inter, sans-serif',
-            fontSize: '0.72rem',
-            fontWeight: 600,
-            letterSpacing: '0.1em',
-            textTransform: 'uppercase',
-            color: '#60A5FA',
-            textDecoration: 'none',
-            transition: 'color 0.2s',
-          }}
-        >
-          <ExternalLink size={12} />
-          LinkedIn
-        </motion.a>
-
-        <motion.a
-          data-hover
-          href="/MitenShah.pdf"
-          download="MitenShah.pdf"
-          whileHover={{ backgroundColor: '#60A5FA', boxShadow: '0 0 20px rgba(96,165,250,0.3)' }}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.4rem',
-            fontFamily: 'Inter, sans-serif',
-            fontSize: '0.72rem',
-            fontWeight: 600,
-            letterSpacing: '0.1em',
-            textTransform: 'uppercase',
-            color: '#FFFFFF',
-            background: '#3B82F6',
-            padding: '0.45rem 1rem',
-            borderRadius: '3px',
-            textDecoration: 'none',
-            transition: 'all 0.2s',
-          }}
-        >
-          <Download size={12} />
-          CV
-        </motion.a>
-      </div>
+      </motion.button>
     </motion.nav>
   );
 };

@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Download, ExternalLink } from 'lucide-react';
 import CardGrid from './CardGrid';
 import FloatingTags from './FloatingTags';
+import SparklesBackground from './Sparkles';
 import { personalInfo } from '../data/portfolioData';
 
 const Hero = ({ onNavigate }) => {
+  const cardGridRef = useRef(null);
+
+  const handleScrollToCards = () => {
+    if (cardGridRef.current) {
+      cardGridRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
     <section
       id="home"
@@ -17,62 +26,41 @@ const Hero = ({ onNavigate }) => {
         paddingTop: '64px',
       }}
     >
-      {/* ── Layer 0: Ghost "MITEN SHAH" background text ─── */}
+      {/* ── Layer 0: Sparkles background (replaces ghost text) ─── */}
+      <SparklesBackground count={32} color1="#3B82F6" color2="#60A5FA" style={{ zIndex: 0, opacity: 0.55 }} />
+
+      {/* ── Subtle radial glow behind hero text ──────────────── */}
       <div
         aria-hidden="true"
         style={{
           position: 'absolute',
-          top: '50%',
+          top: '30%',
           left: '50%',
-          transform: 'translate(-50%, -52%)',
-          zIndex: 0,
-          whiteSpace: 'nowrap',
+          transform: 'translate(-50%, -50%)',
+          width: '60vw',
+          height: '40vh',
+          background: 'radial-gradient(ellipse at center, rgba(59,130,246,0.08) 0%, transparent 70%)',
           pointerEvents: 'none',
-          userSelect: 'none',
-          textAlign: 'center',
-          width: '100%',
+          zIndex: 1,
         }}
-      >
-        <span
-          className="text-stroke font-playfair"
-          style={{
-            fontSize: 'clamp(5rem, 20vw, 22rem)',
-            fontWeight: 900,
-            letterSpacing: '0.04em',
-            lineHeight: 0.88,
-            display: 'block',
-          }}
-        >
-          MITEN
-        </span>
-        <span
-          className="text-stroke font-playfair"
-          style={{
-            fontSize: 'clamp(5rem, 20vw, 22rem)',
-            fontWeight: 900,
-            letterSpacing: '0.04em',
-            lineHeight: 0.88,
-            display: 'block',
-          }}
-        >
-          SHAH
-        </span>
-      </div>
+      />
 
-      {/* ── Layer 5: Floating sphere tags ─────────────────── */}
+      {/* ── Layer 5: Floating sphere tags ─────────────────────── */}
       <FloatingTags />
 
-      {/* ── Layer 10: Main content ─────────────────────────── */}
+      {/* ── Layer 10: Main hero content ───────────────────────── */}
       <div style={{ position: 'relative', zIndex: 10 }}>
+
         {/* Hero text block */}
         <div
           style={{
-            padding: '4rem 2rem 2rem',
+            padding: '4.5rem 2rem 2rem',
             maxWidth: '860px',
             margin: '0 auto',
             textAlign: 'center',
           }}
         >
+          {/* "Portfolio" label */}
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -86,65 +74,40 @@ const Hero = ({ onNavigate }) => {
               marginBottom: '1.25rem',
             }}
           >
-            Portfolio — 2026
+            Portfolio
           </motion.p>
 
+          {/* Name — data-magnify for lens effect */}
           <motion.h1
+            data-magnify
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.7 }}
             style={{
               fontFamily: '"Playfair Display", Georgia, serif',
-              fontSize: 'clamp(2.5rem, 6vw, 5.5rem)',
+              fontSize: 'clamp(2.8rem, 7vw, 6rem)',
               fontWeight: 900,
               color: '#FFFFFF',
               lineHeight: 1.05,
               letterSpacing: '0.02em',
-              marginBottom: '1.25rem',
+              marginBottom: '2.25rem',
             }}
           >
             {personalInfo.name}
           </motion.h1>
 
+          {/* CTA buttons */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.35, duration: 0.6 }}
+            transition={{ delay: 0.4, duration: 0.6 }}
             style={{
               display: 'flex',
-              alignItems: 'center',
               justifyContent: 'center',
+              gap: '1rem',
               flexWrap: 'wrap',
-              gap: '0.5rem 0.75rem',
-              marginBottom: '2.5rem',
+              marginBottom: '1rem',
             }}
-          >
-            {['Product Manager', 'Agile Strategist', 'Global Mindset'].map((tag, i) => (
-              <span key={tag} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                <span
-                  style={{
-                    fontFamily: 'Inter, sans-serif',
-                    fontSize: 'clamp(0.65rem, 1.3vw, 0.85rem)',
-                    fontWeight: 500,
-                    color: '#A3A3A3',
-                    letterSpacing: '0.2em',
-                    textTransform: 'uppercase',
-                  }}
-                >
-                  {tag}
-                </span>
-                {i < 2 && (
-                  <span style={{ width: 4, height: 4, borderRadius: '50%', background: '#3B82F6', flexShrink: 0, display: 'inline-block' }} />
-                )}
-              </span>
-            ))}
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.6 }}
-            style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap', marginBottom: '1rem' }}
           >
             <motion.a
               data-hover
@@ -202,25 +165,47 @@ const Hero = ({ onNavigate }) => {
           </motion.div>
         </div>
 
-        {/* Scroll hint */}
-        <motion.div
+        {/* Scroll hint — clickable to auto-scroll card grid into view */}
+        <motion.button
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-          style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.4rem', marginBottom: '1.5rem' }}
+          transition={{ delay: 0.75 }}
+          onClick={handleScrollToCards}
+          data-hover
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '0.4rem',
+            margin: '0 auto 1.25rem',
+            background: 'transparent',
+            border: 'none',
+            padding: '0.5rem 1rem',
+          }}
         >
-          <span style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: '0.58rem', letterSpacing: '0.25em', textTransform: 'uppercase', color: '#525252' }}>
-            Scroll cards to explore
+          <span style={{
+            fontFamily: '"JetBrains Mono", monospace',
+            fontSize: '0.58rem',
+            letterSpacing: '0.25em',
+            textTransform: 'uppercase',
+            color: '#525252',
+          }}>
+            Scroll to explore
           </span>
-          <motion.div animate={{ x: [0, 8, 0] }} transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}>
+          <motion.div
+            animate={{ x: [0, 8, 0] }}
+            transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
+          >
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <path d="M3 7h8M8 4l3 3-3 3" stroke="#525252" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </motion.div>
-        </motion.div>
+        </motion.button>
 
         {/* Card grid */}
-        <CardGrid onNavigate={onNavigate} />
+        <div ref={cardGridRef}>
+          <CardGrid onNavigate={onNavigate} />
+        </div>
 
         <div style={{ height: '4rem' }} />
       </div>
