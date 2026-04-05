@@ -55,6 +55,10 @@ const SparklesCore = ({
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+      // Set shared state once per frame instead of save()/restore() per particle.
+      // Cuts per-frame overhead by ~(2 × particleCount) canvas state operations.
+      ctx.fillStyle = particleColor;
+
       particles.current.forEach((p, i) => {
         /* life cycle */
         if (p.rising) {
@@ -75,15 +79,15 @@ const SparklesCore = ({
           return;
         }
 
-        /* draw */
-        ctx.save();
+        /* draw — set alpha directly, no save/restore needed */
         ctx.globalAlpha = p.life * 0.85;
-        ctx.fillStyle   = particleColor;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fill();
-        ctx.restore();
       });
+
+      // Reset alpha after the loop (one reset vs one per particle)
+      ctx.globalAlpha = 1;
 
       animRef.current = requestAnimationFrame(draw);
     };

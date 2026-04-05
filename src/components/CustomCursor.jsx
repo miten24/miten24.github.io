@@ -1,9 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 
 const CustomCursor = () => {
   const mouseX = useMotionValue(-200);
   const mouseY = useMotionValue(-200);
+
+  // Refs track live values without triggering re-renders
+  const isHoveringRef = useRef(false);
+  const isVisibleRef  = useRef(false);
+
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible,  setIsVisible]  = useState(false);
 
@@ -17,34 +22,40 @@ const CustomCursor = () => {
   const ringTop  = useTransform(ringY,  y => y - 22);
 
   useEffect(() => {
+    // Single mousemove handler covers position + hover detection.
+    // Previously, separate mouseover/mouseout listeners fired for every
+    // child element the cursor passed through (can be 100s of times/s),
+    // each running an expensive closest() DOM traversal.
+    // Now: one closest() call per animation frame max.
     const onMove = (e) => {
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
-      if (!isVisible) setIsVisible(true);
+
+      const hovering = !!e.target.closest('[data-hover]');
+      if (hovering !== isHoveringRef.current) {
+        isHoveringRef.current = hovering;
+        setIsHovering(hovering);
+      }
+
+      if (!isVisibleRef.current) {
+        isVisibleRef.current = true;
+        setIsVisible(true);
+      }
     };
-    const onOver = (e) => {
-      if (e.target.closest('[data-hover]')) setIsHovering(true);
-    };
-    const onOut = (e) => {
-      if (e.target.closest('[data-hover]')) setIsHovering(false);
-    };
-    const onLeave = () => setIsVisible(false);
-    const onEnter = () => setIsVisible(true);
+
+    const onLeave = () => { isVisibleRef.current = false; setIsVisible(false); };
+    const onEnter = () => { isVisibleRef.current = true;  setIsVisible(true);  };
 
     window.addEventListener('mousemove', onMove, { passive: true });
-    window.addEventListener('mouseover', onOver, { passive: true });
-    window.addEventListener('mouseout',  onOut,  { passive: true });
     document.documentElement.addEventListener('mouseleave', onLeave);
     document.documentElement.addEventListener('mouseenter', onEnter);
 
     return () => {
       window.removeEventListener('mousemove', onMove);
-      window.removeEventListener('mouseover', onOver);
-      window.removeEventListener('mouseout',  onOut);
       document.documentElement.removeEventListener('mouseleave', onLeave);
       document.documentElement.removeEventListener('mouseenter', onEnter);
     };
-  }, [isVisible]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []); // empty deps — listeners attached once, never re-attached
 
   return (
     <>

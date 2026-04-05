@@ -63,7 +63,8 @@ const SparklesBackground = ({
         el.style.transform = `scale(1) rotate(${randomBetween(-30, 30)}deg)`;
       });
 
-      particlesRef.current.push({ el, born, lifespan });
+      // dying flag prevents repeated style writes on the same particle
+      particlesRef.current.push({ el, born, lifespan, dying: false });
     };
 
     /* ── animation loop ── */
@@ -71,12 +72,18 @@ const SparklesBackground = ({
       const now = Date.now();
 
       /* cull dead particles */
-      particlesRef.current = particlesRef.current.filter(({ el, born, lifespan }) => {
+      particlesRef.current = particlesRef.current.filter(({ el, born, lifespan, dying }) => {
         const age = now - born;
-        if (age > lifespan * 0.65) {
+
+        // Write fade-out styles only once per particle (when it first starts dying)
+        if (age > lifespan * 0.65 && !dying) {
+          // mutate the object in-place so the flag persists in the array
+          const p = particlesRef.current.find(p => p.el === el);
+          if (p) p.dying = true;
           el.style.opacity = '0';
           el.style.transform = `scale(0) rotate(90deg)`;
         }
+
         if (age > lifespan) {
           if (el.parentNode === container) container.removeChild(el);
           return false;
