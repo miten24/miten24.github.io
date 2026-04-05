@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <circle cx="50" cy="50" r="50" fill="#3B82F6"/>
+  <text
+    x="50"
+    y="66"
+    font-family="Georgia, serif"
+    font-size="38"
+    font-weight="700"
+    fill="#ffffff"
+    text-anchor="middle"
+    letter-spacing="1"
+  >MS</text>
+</svg>

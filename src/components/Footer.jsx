@@ -1,34 +1,27 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { FiHeart } from 'react-icons/fi';
+import { Mail } from 'lucide-react';
+import { FiLinkedin, FiGithub } from 'react-icons/fi';
 import { personalInfo } from '../data/portfolioData';
 
 const Footer = () => {
   return (
-    <footer className="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center"
-        >
-          <p className="text-gray-600 dark:text-gray-400 flex items-center justify-center">
-            Made {' '}
-            {/* <motion.span
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-              className="mx-1"
-            >
-              <FiHeart className="text-red-500" size={16} />
-            </motion.span> */}
-            by {personalInfo.name}
-          </p>
-          <p className="text-sm text-gray-500 dark:text-gray-500 mt-2">
-            © {new Date().getFullYear()} All rights reserved.
-          </p>
-        </motion.div>
+    <footer style={{ background: '#0A0A0A', borderTop: '1px solid rgba(255,255,255,0.04)', padding: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
+      <p style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: '0.65rem', color: '#525252', letterSpacing: '0.1em' }}>
+        © 2026 Miten Shah — Built with purpose.
+      </p>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+        {[
+          { icon: <FiLinkedin size={16} />, href: personalInfo.linkedin },
+          { icon: <FiGithub size={16} />, href: personalInfo.github },
+          { icon: <Mail size={16} />, href: `mailto:${personalInfo.email}` },
+        ].map((item, i) => (
+          <a key={i} href={item.href} target="_blank" rel="noopener noreferrer" data-hover
+            style={{ color: '#525252', transition: 'color 0.2s', textDecoration: 'none' }}
+            onMouseEnter={e => e.currentTarget.style.color = '#60A5FA'}
+            onMouseLeave={e => e.currentTarget.style.color = '#525252'}>
+            {item.icon}
+          </a>
+        ))}
       </div>
     </footer>
   );

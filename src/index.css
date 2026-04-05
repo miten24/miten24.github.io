@@ -2,122 +2,155 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+/* ─── Google Fonts ─────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=JetBrains+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
-* {
+/* ─── Global Reset ─────────────────────────────────────────── */
+*, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  cursor: none !important;
 }
 
 html {
+  background: #0A0A0A;
   scroll-behavior: smooth;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
+  color-scheme: dark;
 }
 
 body {
-  line-height: 1.5;
+  background: #0A0A0A;
+  color: #FFFFFF;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   width: 100%;
+  min-height: 100vh;
 }
 
-/* Prevent horizontal scrollbar */
 #root {
-  overflow-x: hidden;
   width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: #0A0A0A;
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
+/* ─── Hide All Scrollbars ──────────────────────────────────── */
+::-webkit-scrollbar { width: 0px; height: 0px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: transparent; }
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ─── Typography Utilities ─────────────────────────────────── */
+.font-playfair { font-family: 'Playfair Display', Georgia, serif; }
+.font-mono-jb  { font-family: 'JetBrains Mono', 'Courier New', monospace; }
+.font-inter    { font-family: 'Inter', system-ui, sans-serif; }
+
+/* ─── Ghost Text (MITEN SHAH background) ───────────────────── */
+.text-stroke {
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.05);
+  color: transparent;
+  user-select: none;
+  pointer-events: none;
 }
 
-::-webkit-scrollbar-track {
-  @apply bg-gray-100 dark:bg-gray-800;
-}
-
-::-webkit-scrollbar-thumb {
-  @apply bg-gray-400 dark:bg-gray-600 rounded-full;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  @apply bg-gray-500 dark:bg-gray-500;
-}
-
-/* Line clamp utility */
-.line-clamp-3 {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-/* Focus styles */
-*:focus {
-  outline: 2px solid #3b82f6;
+/* ─── Focus Styles ─────────────────────────────────────────── */
+*:focus-visible {
+  outline: 2px solid #3B82F6;
   outline-offset: 2px;
 }
+*:focus:not(:focus-visible) { outline: none; }
 
-*:focus:not(:focus-visible) {
-  outline: none;
+/* ─── Card Grid Horizontal Scroll ──────────────────────────── */
+.card-grid-scroll {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 0 2rem 3rem;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+.card-grid-scroll::-webkit-scrollbar { display: none; }
+
+/* ─── Sphere orbit rings ────────────────────────────────────── */
+.orbit-ring {
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 1px dashed rgba(96, 165, 250, 0.2);
+  animation: orbitSpin 18s linear infinite;
+  pointer-events: none;
+}
+.orbit-ring-2 {
+  position: absolute;
+  inset: -16px;
+  border-radius: 50%;
+  border: 1px dashed rgba(96, 165, 250, 0.1);
+  animation: orbitSpinRev 24s linear infinite;
+  pointer-events: none;
+}
+@keyframes orbitSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes orbitSpinRev {
+  from { transform: rotate(360deg); }
+  to   { transform: rotate(0deg); }
 }
 
-/* Animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+/* ─── Blue Glow ─────────────────────────────────────────────── */
+.blue-glow { box-shadow: 0 0 40px rgba(96,165,250,0.12), 0 0 80px rgba(59,130,246,0.05); }
+.blue-glow-sm { box-shadow: 0 0 18px rgba(96,165,250,0.1); }
+
+/* ─── Timeline ──────────────────────────────────────────────── */
+.timeline-line {
+  background: linear-gradient(to bottom, #3B82F6, rgba(59,130,246,0.05));
 }
 
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* ─── Toast Overrides ───────────────────────────────────────── */
+.Toastify__toast {
+  background: #111111 !important;
+  color: #FFFFFF !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  border-radius: 0.5rem !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.875rem !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.5) !important;
 }
+.Toastify__toast--success { border-left: 3px solid #3B82F6 !important; }
+.Toastify__toast--error   { border-left: 3px solid #F87171 !important; }
+.Toastify__toast--info    { border-left: 3px solid #60A5FA !important; }
+.Toastify__progress-bar--success { background: #3B82F6 !important; }
+.Toastify__progress-bar--error   { background: #F87171 !important; }
+.Toastify__close-button          { color: #A3A3A3 !important; }
 
-/* Smooth transitions for theme switching */
-* {
-  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
-}
-
-/* Mobile-specific improvements */
-@media (max-width: 768px) {
-  .container {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-  
-  /* Ensure text doesn't overflow on mobile */
-  h1, h2, h3, h4, h5, h6 {
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-  }
-  
-  /* Prevent horizontal scroll on mobile */
-  .grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Disable animations for users who prefer reduced motion */
+/* ─── Reduced Motion ────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* ─── Mobile base ───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .card-grid-scroll {
+    padding: 0 1rem 2rem;
+    gap: 1rem;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 }

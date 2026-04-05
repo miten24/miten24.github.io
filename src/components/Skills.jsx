@@ -2,67 +2,35 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { skills } from '../data/portfolioData';
 
+const CATEGORIES = [
+  { key: 'product', label: 'Product Skills', num: '01' },
+  { key: 'tools',   label: 'Tools & Technologies', num: '02' },
+  { key: 'soft',    label: 'Soft Skills', num: '03' },
+];
+
 const Skills = () => {
-  const skillCategories = [
-    { title: 'Product Skills', skills: skills.product, color: 'primary' },
-    { title: 'Tools & Technologies', skills: skills.tools, color: 'secondary' },
-    { title: 'Soft Skills', skills: skills.soft, color: 'accent' }
-  ];
-
-  const getColorClasses = (color) => {
-    const colors = {
-      primary: 'bg-primary-100 text-primary-800 border-primary-200 dark:bg-primary-900/30 dark:text-primary-300 dark:border-primary-700',
-      secondary: 'bg-secondary-100 text-secondary-800 border-secondary-200 dark:bg-secondary-900/30 dark:text-secondary-300 dark:border-secondary-700',
-      accent: 'bg-accent-100 text-accent-800 border-accent-200 dark:bg-accent-900/30 dark:text-accent-300 dark:border-accent-700'
-    };
-    return colors[color];
-  };
-
   return (
-    <section id="skills" className="scroll-mt-24 py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800">
-      <div className="max-w-4xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Skills & Expertise
+    <div style={{ background: '#0A0A0A', minHeight: '100vh', padding: '7rem 2rem 5rem' }}>
+      <div style={{ maxWidth: '760px', margin: '0 auto' }}>
+        <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} style={{ marginBottom: '4rem' }}>
+          <p style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: '0.65rem', color: '#3B82F6', letterSpacing: '0.35em', textTransform: 'uppercase', marginBottom: '1rem' }}>06 — Skills</p>
+          <h2 style={{ fontFamily: '"Playfair Display", Georgia, serif', fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 900, color: '#FFFFFF', lineHeight: 1.1 }}>
+            Skills &<br /><span style={{ color: '#60A5FA' }}>Expertise.</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-primary-600 to-secondary-600 mx-auto"></div>
         </motion.div>
-
-        <div className="space-y-12">
-          {skillCategories.map((category, categoryIndex) => (
-            <motion.div
-              key={category.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: categoryIndex * 0.2 }}
-            >
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">
-                {category.title}
-              </h3>
-              
-              <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
-                {category.skills.map((skill, skillIndex) => (
-                  <motion.div
-                    key={skill}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ 
-                      duration: 0.5, 
-                      delay: categoryIndex * 0.2 + skillIndex * 0.1,
-                      type: "spring",
-                      stiffness: 200
-                    }}
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    className={`px-4 py-2 rounded-full border font-medium text-sm ${getColorClasses(category.color)}`}
-                  >
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
+          {CATEGORIES.map((cat, ci) => (
+            <motion.div key={cat.key} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: ci * 0.15, duration: 0.5 }}>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: '1rem', marginBottom: '1.25rem' }}>
+                <span style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: '0.65rem', color: '#525252' }}>{cat.num}</span>
+                <h3 style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.8rem', fontWeight: 700, color: '#FFFFFF', letterSpacing: '0.12em', textTransform: 'uppercase' }}>{cat.label}</h3>
+              </div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem' }}>
+                {skills[cat.key].map((skill, si) => (
+                  <motion.div key={skill} initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: ci * 0.1 + si * 0.04, duration: 0.3, type: 'spring', stiffness: 200 }}
+                    data-hover whileHover={{ scale: 1.07, borderColor: 'rgba(96,165,250,0.5)', color: '#BFDBFE' }}
+                    style={{ display: 'inline-flex', alignItems: 'center', padding: '0.375rem 0.875rem', background: 'rgba(59,130,246,0.07)', border: '1px solid rgba(96,165,250,0.18)', borderRadius: '9999px', color: '#93C5FD', fontFamily: 'Inter, sans-serif', fontSize: '0.8rem', fontWeight: 500, transition: 'all 0.2s', whiteSpace: 'nowrap' }}>
                     {skill}
                   </motion.div>
                 ))}
@@ -71,7 +39,7 @@ const Skills = () => {
           ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

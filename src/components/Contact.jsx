@@ -1,209 +1,120 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FiMail, FiLinkedin, FiSend, FiGithub } from 'react-icons/fi';
-import { ToastContainer, toast } from 'react-toastify';
+import { Mail, Send, Loader2 } from 'lucide-react';
+import { FiLinkedin, FiGithub } from 'react-icons/fi';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { personalInfo } from '../data/portfolioData';
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
+  const [form, setForm] = useState({ name: '', email: '', message: '' });
+  const [loading, setLoading] = useState(false);
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
-
+    if (!form.name || !form.email || !form.message) {
+      toast.error('Please fill in all fields.');
+      return;
+    }
+    setLoading(true);
     try {
-      const response = await fetch('https://mitenshah-backend.vercel.app/contact', {
+      const res = await fetch('https://portfolio-backend-mitenshah.vercel.app/contact', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
       });
-
-      if (response.ok) {
-        toast.success('Message sent successfully!', { position: "top-right" });
-        setFormData({ name: '', email: '', message: '' });
+      if (res.ok) {
+        toast.success('Message sent! I\'ll get back to you shortly.');
+        setForm({ name: '', email: '', message: '' });
       } else {
-        toast.error('Failed to send message. Please try again.', { position: "top-right" });
+        toast.error('Something went wrong. Please try again.');
       }
-    } catch (error) {
-      console.error("Error:", error);
-      toast.error('Something went wrong!', { position: "top-right" });
+    } catch {
+      toast.error('Unable to send. Please email me directly.');
     } finally {
-      setIsSubmitting(false);
+      setLoading(false);
     }
   };
 
-  return (
-    <section id="contact" className="scroll-mt-24 py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800">
-      <div className="max-w-4xl mx-auto">
-        <ToastContainer />
+  const inputStyle = {
+    width: '100%',
+    background: '#111111',
+    border: '1px solid rgba(255,255,255,0.08)',
+    borderRadius: '3px',
+    padding: '0.875rem 1rem',
+    color: '#FFFFFF',
+    fontFamily: 'Inter, sans-serif',
+    fontSize: '0.9rem',
+    outline: 'none',
+    transition: 'border-color 0.2s',
+  };
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Get In Touch
+  return (
+    <div style={{ background: '#0A0A0A', minHeight: '100vh', padding: '7rem 2rem 5rem' }}>
+      <ToastContainer position="bottom-right" autoClose={4000} theme="dark" toastClassName="custom-toast" />
+      <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+        <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} style={{ marginBottom: '4rem' }}>
+          <p style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: '0.65rem', color: '#3B82F6', letterSpacing: '0.35em', textTransform: 'uppercase', marginBottom: '1rem' }}>08 — Contact</p>
+          <h2 style={{ fontFamily: '"Playfair Display", Georgia, serif', fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 900, color: '#FFFFFF', lineHeight: 1.1 }}>
+            Let's<br /><span style={{ color: '#60A5FA' }}>Connect.</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-primary-600 to-secondary-600 mx-auto mb-6"></div>
-          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            I'm always open to discussing new opportunities, innovative projects, or just having a great conversation.
-          </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
-          {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-gray-900 dark:text-white"
-                />
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem' }}>
+          {/* Form */}
+          <motion.form initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} onSubmit={handleSubmit}
+            style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+            {[
+              { name: 'name', label: 'Full Name', type: 'text', placeholder: 'Your name' },
+              { name: 'email', label: 'Email', type: 'email', placeholder: 'your@email.com' },
+            ].map(field => (
+              <div key={field.name}>
+                <label style={{ display: 'block', fontFamily: 'Inter, sans-serif', fontSize: '0.72rem', fontWeight: 600, color: '#525252', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '0.4rem' }}>{field.label}</label>
+                <input type={field.type} name={field.name} value={form[field.name]} onChange={handleChange} placeholder={field.placeholder}
+                  data-hover style={inputStyle}
+                  onFocus={e => e.target.style.borderColor = 'rgba(96,165,250,0.5)'}
+                  onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.08)'} />
               </div>
-
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-gray-900 dark:text-white"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  rows={5}
-                  required
-                  className="w-full px-4 py-3 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-gray-900 dark:text-white resize-none"
-                />
-              </div>
-
-              <motion.button
-                type="submit"
-                disabled={isSubmitting}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-full inline-flex items-center justify-center px-6 py-3 bg-primary-600 hover:bg-primary-700 disabled:bg-primary-400 text-white font-medium rounded-lg transition-colors"
-              >
-                <FiSend className="mr-2" size={18} />
-                {isSubmitting ? 'Sending...' : 'Send Message'}
-              </motion.button>
-            </form>
-          </motion.div>
-
-          {/* Contact Info */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="space-y-8"
-          >
+            ))}
             <div>
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-                Let's Connect
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-8">
-                Feel free to reach out through any of these channels. I typically respond within 24 hours.
-              </p>
+              <label style={{ display: 'block', fontFamily: 'Inter, sans-serif', fontSize: '0.72rem', fontWeight: 600, color: '#525252', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '0.4rem' }}>Message</label>
+              <textarea name="message" value={form.message} onChange={handleChange} placeholder="Tell me about your project or opportunity..." rows={5}
+                data-hover style={{ ...inputStyle, resize: 'vertical' }}
+                onFocus={e => e.target.style.borderColor = 'rgba(96,165,250,0.5)'}
+                onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.08)'} />
             </div>
+            <motion.button type="submit" data-hover disabled={loading}
+              whileHover={!loading ? { backgroundColor: '#60A5FA', boxShadow: '0 0 24px rgba(96,165,250,0.35)' } : {}}
+              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', padding: '0.875rem 1.75rem', background: loading ? '#1D4ED8' : '#3B82F6', color: '#FFFFFF', borderRadius: '3px', fontFamily: 'Inter, sans-serif', fontSize: '0.82rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', border: 'none', transition: 'all 0.2s', opacity: loading ? 0.8 : 1 }}>
+              {loading ? <><Loader2 size={15} style={{ animation: 'spin 1s linear infinite' }} /> Sending...</> : <><Send size={15} /> Send Message</>}
+            </motion.button>
+          </motion.form>
 
-            <div className="space-y-4">
-              <motion.a
-                href={`mailto:${personalInfo.email}`}
-                whileHover={{ scale: 1.05 }}
-                className="flex items-center p-4 bg-white dark:bg-gray-900 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors"
-              >
-                <div className="flex items-center justify-center w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-full mr-4">
-                  <FiMail className="text-primary-600 dark:text-primary-400" size={20} />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900 dark:text-white">Email</h4>
-                  <p className="text-gray-600 dark:text-gray-400">{personalInfo.email}</p>
-                </div>
+          {/* Contact info */}
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }}
+            style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.95rem', color: '#A3A3A3', lineHeight: 1.75 }}>
+              I'm always open to new opportunities, collaborations, and conversations. Feel free to reach out — I'll respond within 24 hours.
+            </p>
+            {[
+              { icon: <Mail size={16} />, label: personalInfo.email, href: `mailto:${personalInfo.email}` },
+              { icon: <FiLinkedin size={16} />, label: 'LinkedIn Profile', href: personalInfo.linkedin },
+              { icon: <FiGithub size={16} />, label: 'GitHub Repos', href: personalInfo.github },
+            ].map(link => (
+              <motion.a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer" data-hover
+                whileHover={{ color: '#93C5FD', x: 4 }}
+                style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', color: '#60A5FA', textDecoration: 'none', fontFamily: 'Inter, sans-serif', fontSize: '0.9rem', transition: 'all 0.2s' }}>
+                {link.icon}
+                <span>{link.label}</span>
               </motion.a>
-
-              <motion.a
-                href={personalInfo.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.05 }}
-                className="flex items-center p-4 bg-white dark:bg-gray-900 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors"
-              >
-                <div className="flex items-center justify-center w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-full mr-4">
-                  <FiLinkedin className="text-primary-600 dark:text-primary-400" size={20} />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900 dark:text-white">LinkedIn</h4>
-                  <p className="text-gray-600 dark:text-gray-400">Connect with me</p>
-                </div>
-              </motion.a>
-
-              <motion.a
-                href={personalInfo.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.05 }}
-                className="flex items-center p-4 bg-white dark:bg-gray-900 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 hover:border-primary-300 dark:hover:border-primary-600 transition-colors"
-              >
-                <div className="flex items-center justify-center w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-full mr-4">
-                  <FiGithub className="text-primary-600 dark:text-primary-400" size={20} />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900 dark:text-white">Github</h4>
-                  <p className="text-gray-600 dark:text-gray-400">Check out my work</p>
-                </div>
-              </motion.a>
-            </div>
+            ))}
           </motion.div>
         </div>
       </div>
-    </section>
+      <style>{`@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
+    </div>
   );
 };
 

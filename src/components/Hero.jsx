@@ -1,91 +1,228 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FiDownload, FiExternalLink } from 'react-icons/fi';
+import { Download, ExternalLink } from 'lucide-react';
+import CardGrid from './CardGrid';
+import FloatingTags from './FloatingTags';
 import { personalInfo } from '../data/portfolioData';
 
-
-const Hero = () => {
+const Hero = ({ onNavigate }) => {
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-primary-50 via-white to-secondary-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
-      <div className="max-w-4xl mx-auto text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+    <section
+      id="home"
+      style={{
+        position: 'relative',
+        minHeight: '100vh',
+        background: '#0A0A0A',
+        overflow: 'hidden',
+        paddingTop: '64px',
+      }}
+    >
+      {/* ── Layer 0: Ghost "MITEN SHAH" background text ─── */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -52%)',
+          zIndex: 0,
+          whiteSpace: 'nowrap',
+          pointerEvents: 'none',
+          userSelect: 'none',
+          textAlign: 'center',
+          width: '100%',
+        }}
+      >
+        <span
+          className="text-stroke font-playfair"
+          style={{
+            fontSize: 'clamp(5rem, 20vw, 22rem)',
+            fontWeight: 900,
+            letterSpacing: '0.04em',
+            lineHeight: 0.88,
+            display: 'block',
+          }}
         >
-          <motion.h1
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.8 }}
-          >
-            Hi, I'm{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-secondary-600">
-              {personalInfo.name}
-            </span>
-          </motion.h1>
+          MITEN
+        </span>
+        <span
+          className="text-stroke font-playfair"
+          style={{
+            fontSize: 'clamp(5rem, 20vw, 22rem)',
+            fontWeight: 900,
+            letterSpacing: '0.04em',
+            lineHeight: 0.88,
+            display: 'block',
+          }}
+        >
+          SHAH
+        </span>
+      </div>
 
+      {/* ── Layer 5: Floating sphere tags ─────────────────── */}
+      <FloatingTags />
+
+      {/* ── Layer 10: Main content ─────────────────────────── */}
+      <div style={{ position: 'relative', zIndex: 10 }}>
+        {/* Hero text block */}
+        <div
+          style={{
+            padding: '4rem 2rem 2rem',
+            maxWidth: '860px',
+            margin: '0 auto',
+            textAlign: 'center',
+          }}
+        >
           <motion.p
-            className="text-xl sm:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
+            transition={{ delay: 0.1, duration: 0.6 }}
+            style={{
+              fontFamily: '"JetBrains Mono", monospace',
+              fontSize: '0.68rem',
+              color: '#3B82F6',
+              letterSpacing: '0.35em',
+              textTransform: 'uppercase',
+              marginBottom: '1.25rem',
+            }}
           >
-            {personalInfo.title}
+            Portfolio — 2026
           </motion.p>
 
-          <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
+            transition={{ delay: 0.2, duration: 0.7 }}
+            style={{
+              fontFamily: '"Playfair Display", Georgia, serif',
+              fontSize: 'clamp(2.5rem, 6vw, 5.5rem)',
+              fontWeight: 900,
+              color: '#FFFFFF',
+              lineHeight: 1.05,
+              letterSpacing: '0.02em',
+              marginBottom: '1.25rem',
+            }}
+          >
+            {personalInfo.name}
+          </motion.h1>
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.35, duration: 0.6 }}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexWrap: 'wrap',
+              gap: '0.5rem 0.75rem',
+              marginBottom: '2.5rem',
+            }}
+          >
+            {['Product Manager', 'Agile Strategist', 'Global Mindset'].map((tag, i) => (
+              <span key={tag} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <span
+                  style={{
+                    fontFamily: 'Inter, sans-serif',
+                    fontSize: 'clamp(0.65rem, 1.3vw, 0.85rem)',
+                    fontWeight: 500,
+                    color: '#A3A3A3',
+                    letterSpacing: '0.2em',
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  {tag}
+                </span>
+                {i < 2 && (
+                  <span style={{ width: 4, height: 4, borderRadius: '50%', background: '#3B82F6', flexShrink: 0, display: 'inline-block' }} />
+                )}
+              </span>
+            ))}
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.6 }}
+            style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap', marginBottom: '1rem' }}
           >
             <motion.a
-              href='/MitenShah.pdf'
+              data-hover
+              href="/MitenShah.pdf"
               download="MitenShah.pdf"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-colors shadow-lg hover:shadow-xl"
+              whileHover={{ backgroundColor: '#60A5FA', boxShadow: '0 0 24px rgba(96,165,250,0.35)' }}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                padding: '0.7rem 1.75rem',
+                background: '#3B82F6',
+                color: '#FFFFFF',
+                borderRadius: '3px',
+                fontFamily: 'Inter, sans-serif',
+                fontSize: '0.78rem',
+                fontWeight: 600,
+                letterSpacing: '0.1em',
+                textTransform: 'uppercase',
+                textDecoration: 'none',
+                transition: 'all 0.2s',
+              }}
             >
-              <FiDownload className="mr-2" size={20} />
+              <Download size={14} />
               Download CV
             </motion.a>
 
             <motion.a
+              data-hover
               href={personalInfo.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center px-6 py-3 bg-transparent border-2 border-primary-600 text-primary-600 dark:text-primary-400 hover:bg-primary-600 hover:text-white dark:hover:text-white font-medium rounded-lg transition-colors"
+              whileHover={{ borderColor: '#60A5FA', color: '#93C5FD', backgroundColor: 'rgba(96,165,250,0.06)' }}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                padding: '0.7rem 1.75rem',
+                background: 'transparent',
+                color: '#60A5FA',
+                border: '1px solid rgba(96,165,250,0.4)',
+                borderRadius: '3px',
+                fontFamily: 'Inter, sans-serif',
+                fontSize: '0.78rem',
+                fontWeight: 600,
+                letterSpacing: '0.1em',
+                textTransform: 'uppercase',
+                textDecoration: 'none',
+                transition: 'all 0.2s',
+              }}
             >
-              <FiExternalLink className="mr-2" size={20} />
+              <ExternalLink size={14} />
               View LinkedIn
             </motion.a>
           </motion.div>
-        </motion.div>
+        </div>
 
+        {/* Scroll hint */}
         <motion.div
-          className="mt-16"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 1 }}
+          transition={{ delay: 0.8 }}
+          style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.4rem', marginBottom: '1.5rem' }}
         >
-          <motion.div
-            animate={{ y: [0, -10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="text-primary-600 dark:text-primary-400"
-
-          >
-          
-              <a href="#about">
-                <svg className="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                </svg>
-              </a>
-            
+          <span style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: '0.58rem', letterSpacing: '0.25em', textTransform: 'uppercase', color: '#525252' }}>
+            Scroll cards to explore
+          </span>
+          <motion.div animate={{ x: [0, 8, 0] }} transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M3 7h8M8 4l3 3-3 3" stroke="#525252" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
           </motion.div>
         </motion.div>
+
+        {/* Card grid */}
+        <CardGrid onNavigate={onNavigate} />
+
+        <div style={{ height: '4rem' }} />
       </div>
     </section>
   );

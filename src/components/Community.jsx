@@ -1,64 +1,38 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FiCalendar, FiUsers } from 'react-icons/fi';
+import { Calendar, Users } from 'lucide-react';
 import { community } from '../data/portfolioData';
 
 const Community = () => {
   return (
-    <section id="community" className="scroll-mt-24 py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
-      <div className="max-w-4xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Community & Leadership
+    <div style={{ background: '#0A0A0A', minHeight: '100vh', padding: '7rem 2rem 5rem' }}>
+      <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+        <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} style={{ marginBottom: '4rem' }}>
+          <p style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: '0.65rem', color: '#3B82F6', letterSpacing: '0.35em', textTransform: 'uppercase', marginBottom: '1rem' }}>07 — Community</p>
+          <h2 style={{ fontFamily: '"Playfair Display", Georgia, serif', fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 900, color: '#FFFFFF', lineHeight: 1.1 }}>
+            Community &<br /><span style={{ color: '#60A5FA' }}>Leadership.</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-primary-600 to-secondary-600 mx-auto"></div>
         </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {community.map((item, index) => (
-            <motion.div
-              key={item.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
-              whileHover={{ y: -5 }}
-              className="bg-gray-50 dark:bg-gray-800 p-4 sm:p-6 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700"
-            >
-              <motion.div
-                whileHover={{ scale: 1.1 }}
-                className="inline-flex items-center justify-center w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-full mb-4"
-              >
-                <FiUsers className="text-primary-600 dark:text-primary-400" size={24} />
-              </motion.div>
-              
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
-                {item.organization}
-              </h3>
-              
-              <h4 className="text-lg font-semibold text-primary-600 dark:text-primary-400 mb-2">
-                {item.role}
-              </h4>
-              
-              <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-3">
-                <FiCalendar className="mr-1" />
-                {item.duration}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1.25rem' }}>
+          {community.map((item, i) => (
+            <motion.div key={item.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.12, duration: 0.5 }}
+              data-hover whileHover={{ borderColor: 'rgba(96,165,250,0.35)', boxShadow: '0 0 30px rgba(96,165,250,0.08)', y: -4 }}
+              style={{ background: '#111111', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '4px', padding: '1.75rem', transition: 'all 0.2s' }}>
+              <div style={{ width: 44, height: 44, borderRadius: '50%', background: 'rgba(59,130,246,0.1)', border: '1px solid rgba(96,165,250,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.25rem' }}>
+                <Users size={20} color="#60A5FA" />
               </div>
-
-              <p className="text-gray-700 dark:text-gray-300 text-sm">
-                {item.description}
-              </p>
+              <h3 style={{ fontFamily: 'Inter, sans-serif', fontSize: '1rem', fontWeight: 700, color: '#FFFFFF', marginBottom: '0.25rem' }}>{item.organization}</h3>
+              <h4 style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.85rem', fontWeight: 600, color: '#3B82F6', marginBottom: '0.6rem' }}>{item.role}</h4>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '1rem' }}>
+                <Calendar size={11} color="#525252" />
+                <span style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: '0.68rem', color: '#525252' }}>{item.duration}</span>
+              </div>
+              <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.875rem', color: '#A3A3A3', lineHeight: 1.65 }}>{item.description}</p>
             </motion.div>
           ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
