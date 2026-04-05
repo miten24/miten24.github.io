@@ -11,7 +11,8 @@ All content sourced from `src/data/portfolioData.js`. This file must NEVER be mo
 - **LinkedIn:** https://linkedin.com/in/mitenshah24
 - **GitHub:** https://github.com/miten24?tab=repositories
 - **Email:** mitenshah24@gmail.com
-- **CV:** /cv/miten-shah-cv.pdf (actual file: /MitenShah.pdf)
+- **CV:** /MitenShah.pdf
+- **WhatsApp:** +91 7874393172
 
 ---
 
@@ -47,6 +48,8 @@ All content sourced from `src/data/portfolioData.js`. This file must NEVER be mo
 - Location: Remote, India
 - Bullets: 4 (8+ B2B clients, market research, inbound leads, technical reports)
 
+**Section Layout**: Single-column timeline. Removed: stats bar (Companies/Locations/Domains), right-side info panel.
+
 ---
 
 ## Education (2 entries)
@@ -63,12 +66,16 @@ All content sourced from `src/data/portfolioData.js`. This file must NEVER be mo
 - Grade: Distinction (9.45/10 CGPA)
 - Modules: Engineering Mathematics, Big Data Analytics, Python, Cloud Computing, etc.
 
+**Section Layout**: Single-column timeline with Calendar + Award icons. Removed: right panel (Countries, Degrees count).
+
 ---
 
 ## Certifications (3 total)
 1. Agile Software Development – ETH Zurich
 2. Python & Statistics for Financial Analysis – HKUST Hong Kong
 3. Digital Transformation Virtual Experience Program – BCG
+
+**Section Layout**: Responsive grid cards (no tabs). Removed: "3 Certifications" count box, "Verified" tags on individual cert cards.
 
 ---
 
@@ -81,11 +88,13 @@ All content sourced from `src/data/portfolioData.js`. This file must NEVER be mo
 4. **Technology Transfer of AI** — Apr 2023–Sep 2023 — MSc Thesis — Google Drive link
 5. **Forever Bikes Business Proposal** — Dec 2022–Apr 2023 — Cargo bike business, team of 6 — Google Drive link
 6. **Hi-Mate Helmet Business Strategy** — Sep 2022–Apr 2023 — UK & India market expansion — Google Drive link
-7. **Amazon Industry 4.0 Consultancy** — Sep 2022–Dec 2022 — 5 strategic recommendations [NOT FEATURED]
+7. **Amazon Industry 4.0 Consultancy** — Sep 2022–Dec 2022 — 5 strategic recommendations
 
 ### Not Featured:
 8. **Plan My Trip** — Jan 2022–Apr 2022 — Travel planning app, 15+ features — GitHub
 9. **ERP System for Society Management** — Jul 2021–Nov 2021 — Society ERP — GitHub
+
+**Section Layout**: Unified card design for all projects (featured and non-featured). Removed: Featured/Total count boxes, "Featured" tag distinction. All cards use: left accent bar, Calendar icon, title, description, "View Project" CTA. Show More/Show Less button for non-featured projects.
 
 ---
 
@@ -100,6 +109,8 @@ Jira, Claude Code, Figma (Make), Notion, Draw.io, Microsoft Office Suite, Google
 ### Soft Skills (6)
 Stakeholder Management, Leadership, Analytical Thinking, Cross-Functional Collaboration, Communication, User Centric Thinking
 
+**Section Layout**: All 3 categories visible at once (no tabs). Each category shows emoji + label header, followed by responsive flex wrap of skill chip pills. Removed: tab buttons, count badges (e.g., "Product Skills 7").
+
 ---
 
 ## Community (3 entries)
@@ -108,14 +119,56 @@ Stakeholder Management, Leadership, Analytical Thinking, Cross-Functional Collab
 2. **Wentworth GCRC** — Events & Social Media Chair — Sep 2022–Sep 2023 — 8000+ students, £2,500 Greville Bloodworth Scholarship
 3. **Rotaract Club of Surat** — Board of Directors — Feb 2021–Jul 2022 — hair donation drive, 10+ events
 
+**Section Layout**: Stacked role cards with left accent bar, icon, organization, role, duration, description. Removed: "3 Roles" count box at top, impact note paragraph at bottom.
+
 ---
 
-## Navigation Sections (8)
+## Contact
+
+**Email**: mitenshah24@gmail.com
+**WhatsApp**: +91 7874393172
+
+**Section Layout**: Business card format — name, designation, email, phone, headshot. CTAs: "Connect via Email" (mailto) + "Connect via WhatsApp" (deep link with prefilled text). Removed: form submission, backend Nodemailer.
+
+---
+
+## Navigation Sections
+
 Home → About → Experience → Education → Certifications → Projects → Skills → Community → Contact
 
 ---
 
+## UI Components Added/Removed in Latest Update
+
+### Added Components
+- **SparklesCore.jsx** — Canvas-based aceternity-style particle field beneath hero title
+
+### Removed Components/Features
+- "MITEN SHAH" ghost text background (replaced with SparklesCore particles)
+- Role tags row below hero name
+- Tab buttons in Skills section
+- Count badges (e.g., "7 skills", "3 Certifications", "3 Roles")
+- Right-side panels (Experience: Domains/Impact Metrics, Education: Countries/Degree count)
+- Stat badges on About page (4+ Years, 10+ Products, 3 Continents)
+- Headshot image on About page
+- "Featured" tag distinction on Project cards
+- Featured/Total count boxes on sections
+- Contact form + Nodemailer backend (replaced with business card + mailto/WhatsApp links)
+- LinkedIn + CV buttons from top navigation
+- "Verified" tags on Certification cards
+- Impact note paragraph in Community section
+
+### Updated Features
+- **CustomCursor**: Reverted to simple 8px dot + 44px ring (no magnification effect)
+- **CardGrid**: DVD-style pick-up effect (±1.5-1.9deg base rotation, hover lift with scale 1.06, deeper shadows)
+- **SphereTag**: Added `whiteSpace: 'pre-line'` for multi-line label rendering
+- **FloatingTags**: Global Mindset repositioned to `right: 4%, top: 58%` (beside CTA buttons, not hidden)
+- **All section pages**: Made fully responsive with `clamp()` for typography and spacing
+
+---
+
 ## Key Metrics to Preserve
+
 - 20% projected wastage reduction (HomeBuild Assist AI)
 - 30% presales conversion rate (BigStep)
 - 3+ IHCL projects including Taj InnerCircle App
@@ -137,3 +190,12 @@ Home → About → Experience → Education → Certifications → Projects → 
 - 100+ students mentored (Microsoft)
 - 8,000+ students represented (Wentworth)
 - £2,500 Greville Bloodworth Scholarship
+
+---
+
+## Documentation Maintenance Rule (CLAUDE.md)
+
+**After every commit:** Update `/docs` if any design tokens, component API, or content structure changed.
+- **design_system.md**: Update for style changes, new components, animation changes, layout updates
+- **content_map.md**: Update for content changes, section layout changes, removed/added features
+- **Last updated**: April 2026 (after commits: DVD card effect, tabless skills, SphereTag text rendering fix)
