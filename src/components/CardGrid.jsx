@@ -136,24 +136,35 @@ const CoverArt = ({ id }) => {
   return map[id] || null;
 };
 
+/* ─── Per-card base rotation (slight tilt like physical cards on a surface) */
+const BASE_ROTATIONS = [1.6, -1.8, 1.3, -1.5, 1.9, -1.2, 1.5, -1.7];
+
 /* ─── Single card ────────────────────────────────────────────── */
 const SectionCard = ({ section, index, onNavigate }) => {
   const cardRef = useRef(null);
   const isOdd   = index % 2 === 1;
   const [hovered, setHovered] = useState(false);
+  const baseRot = BASE_ROTATIONS[index % BASE_ROTATIONS.length];
+
+  const handleMouseEnter = () => {
+    setHovered(true);
+    if (cardRef.current) {
+      cardRef.current.style.transform = 'translateY(-22px) scale(1.06) rotate(0deg)';
+    }
+  };
 
   const handleMouseMove = (e) => {
     const card = cardRef.current;
     if (!card) return;
     const r  = card.getBoundingClientRect();
-    const rx = ((e.clientY - r.top)  / r.height - 0.5) * -10;
-    const ry = ((e.clientX - r.left) / r.width  - 0.5) *  10;
-    card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(6px) translateY(${isOdd ? '5rem' : '0'})`;
+    const rx = ((e.clientY - r.top)  / r.height - 0.5) * -6;
+    const ry = ((e.clientX - r.left) / r.width  - 0.5) *  6;
+    card.style.transform = `translateY(-22px) scale(1.06) perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg)`;
   };
 
   const handleMouseLeave = () => {
     if (cardRef.current) {
-      cardRef.current.style.transform = `translateY(${isOdd ? '5rem' : '0'})`;
+      cardRef.current.style.transform = `rotate(${baseRot}deg)`;
     }
     setHovered(false);
   };
@@ -171,26 +182,28 @@ const SectionCard = ({ section, index, onNavigate }) => {
         ref={cardRef}
         data-hover
         onClick={() => onNavigate(section.id)}
+        onMouseEnter={handleMouseEnter}
         onMouseMove={handleMouseMove}
-        onMouseEnter={() => setHovered(true)}
         onMouseLeave={handleMouseLeave}
         style={{
           width: 'clamp(190px, 23vw, 260px)',
           height: 'clamp(270px, 36vw, 370px)',
           background: '#111111',
           border: hovered
-            ? '1px solid rgba(96,165,250,0.45)'
+            ? '1px solid rgba(96,165,250,0.5)'
             : '1px solid rgba(255,255,255,0.07)',
           borderRadius: '6px',
           marginTop: isOdd ? '5rem' : '0',
           display: 'flex',
           flexDirection: 'column',
           overflow: 'hidden',
-          transition: 'border-color 0.25s, box-shadow 0.25s',
+          transition: 'border-color 0.25s, box-shadow 0.3s, transform 0.35s cubic-bezier(0.23, 1, 0.32, 1)',
           boxShadow: hovered
-            ? '0 20px 60px rgba(59,130,246,0.14), 0 0 0 1px rgba(96,165,250,0.18)'
-            : '0 4px 20px rgba(0,0,0,0.4)',
+            ? '0 32px 80px rgba(0,0,0,0.65), 0 8px 30px rgba(59,130,246,0.2), 0 0 0 1px rgba(96,165,250,0.25)'
+            : '0 6px 24px rgba(0,0,0,0.45)',
           willChange: 'transform',
+          transform: `rotate(${baseRot}deg)`,
+          cursor: 'pointer',
         }}
       >
         {/* Cover art */}

@@ -6,18 +6,20 @@ const FloatingTags = () => {
     {
       label: 'Product\nManager',
       delay: 0,
-      style: { left: '4%', top: '12%' },
+      // left edge, vertically centred in the hero (below title, above cards)
+      style: { left: '3%', top: '18%' },
     },
     {
       label: 'Agile\nStrategist',
       delay: 1.5,
-      style: { right: '5%', top: '8%' },
+      // right edge, near top — clear of the centred title
+      style: { right: '3%', top: '10%' },
     },
     {
       label: 'Global\nMindset',
       delay: 3,
-      // moved from bottom-centre to top-centre so it stays visible above the card grid
-      style: { left: '50%', top: '22%', transform: 'translateX(-50%)' },
+      // right side, lower — sits between CTA buttons and the card row
+      style: { right: '4%', top: '58%' },
     },
   ];
 
