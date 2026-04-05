@@ -60,6 +60,7 @@ const SphereTag = ({ label, delay = 0, style = {} }) => {
               color: '#A3A3A3',
               textAlign: 'center',
               lineHeight: 1.4,
+              whiteSpace: 'pre-line',
               zIndex: 1,
             }}
           >
